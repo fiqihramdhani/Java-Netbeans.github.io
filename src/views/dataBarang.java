@@ -82,6 +82,7 @@ public class dataBarang extends javax.swing.JDialog {
             java.sql.Statement stat = conn.createStatement();
             ResultSet hasil = stat.executeQuery(sql);
             while (hasil.next()){
+                String No = hasil.getString("ID");
                 String tanggal = hasil.getString("tanggal");
                 String kode_part = hasil.getString("kode_part");
                 String nama_part = hasil.getString("nama_part");
@@ -89,7 +90,7 @@ public class dataBarang extends javax.swing.JDialog {
                 String jumlah = hasil.getString("jumlah");
                 String Harga = hasil.getString("Harga");
                 String keterangan = hasil.getString("keterangan");
-                String[] data = {"",tanggal,kode_part,nama_part,kategori,jumlah,Harga,keterangan};
+                String[] data = {No,tanggal,kode_part,nama_part,kategori,jumlah,Harga,keterangan};
                 tabmode.addRow(data);
                 noTable();
             }
@@ -857,7 +858,7 @@ public class dataBarang extends javax.swing.JDialog {
         String f = tabmode.getValueAt(bar, 5).toString();
         String g = tabmode.getValueAt(bar, 6).toString();
         String h = tabmode.getValueAt(bar, 7).toString();
-
+       
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
         Date dateValue = null;
         try{
@@ -902,6 +903,7 @@ public class dataBarang extends javax.swing.JDialog {
        
         try {
             PreparedStatement stat = conn.prepareStatement(sql);
+            
             stat.setString(1, jTextField1.getText());
             stat.setString(2, txtKodePart.getText());
             stat.setString(3, txtNamaPart.getText());
